@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+    <div style="margin-top:30px;" egitmenler-Listesi>
+        <!--<egitmenler-Listesi></egitmenler-Listesi>-->
+    </div>
+</body>
+</html>
+
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("EgitmenlerListesi", EgitmenleriGetir);
+
+    EgitmenleriGetir.$inject = ["$scope"];
+
+    function EgitmenleriGetir($scope) {
+        $scope.egitmenler = [
+            { ad: 'Duygu', soyad: 'Yenilmez', bolum: 'Yazılım' },
+            { ad: 'Yiğit', soyad: 'Hacıefendioğlu', bolum: 'Yazılım' },
+            { ad: 'Cihan', soyad: 'Alagöz', bolum: 'Yazılım' },
+            { ad: 'Tansu', soyad: 'İçin', bolum: 'Yazılım' },
+            { ad: 'Faruk', soyad: 'Sarı', bolum: 'Yazılım' },
+            { ad: 'Selçuk', soyad: 'Hatırlamıyorum', bolum: 'Yazılım' },
+            { ad: 'Duygu', soyad: 'Yenilmez', bolum: 'Unity 3D' }
+        ];
+    };
+
+    // directive'lerin isimlendirmeleri camelCasing ile yapılır. Her kelimeyi bu yüzden ayırt eder ve aralarında bu yüzden "-" bekler...
+    app.directive("egitmenlerListesi", DirectiveOlustur);
+
+    function DirectiveOlustur() {
+        // Her zaman return kullanılır...
+        return {
+            // restrict ifadesi ile directive'in element mi, attribute mu vs olduğunu belirtiriz. 
+            // E: element, A: attribute, C: class ve M: comment
+            //restrict: 'E',
+            restrict: 'A',
+            // template kısmında oluşturulacak olan directive'in içeriği yazılır. Bunu html tag'leriyle yazabildiğiniz gibi, templateUrl diyerek başka sayfa / view da çağırabilirsiniz...
+            //template: '<div class="container" ng-controller="EgitmenlerListesi"> <div class="col-md-8" > <table class="table table-bordered"> <thead> <tr> <th>AD</th> <th>SOYAD</th> <th>BÖLÜM</th> </tr> </thead> <tbody> <tr ng-repeat="egitmen in egitmenler"> <td>{{ egitmen.ad }}</td> <td>{{ egitmen.soyad }}</td> <td>{{ egitmen.bolum }}</td> </tr> </tbody> </table> </div> </div>'
+            templateUrl: 'index2.html'
+        }
+    };
+</script>

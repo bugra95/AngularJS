@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container" ng-app="myApp" ng-controller="ProductListController">
+    <div class="row" style="margin-top:30px;">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+                    <label>Product Name: </label>
+                    <input type="text" class="form-control" ng-model="productName" />
+                    <label hidden ng-model="productID"></label>
+                </div>
+                <div class="form-group">
+                    <label>Discontinued: </label>
+                    <input type="checkbox" class="checkbox" ng-model="discontinued" />
+                </div>
+                <button class="btn btn-default" ng-click="ekle()">EKLE</button>
+                <button class="btn btn-default" ng-click="guncelle(product)">GÜNCELLE</button>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Listede Arama Yap..." ng-model="ara" />
+            <div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Discontinued</th>
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in jsonData | filter:ara | orderBy:'ProductID'">
+                            <td>{{data.ProductID}}</td>
+                            <td>{{data.ProductName}}</td>
+                            <td>{{data.Discontinued}}</td>
+                            <td><button class="btn btn-danger" ng-click="sil(data.ProductID)">SİL</button></td>
+                            <td><button class="btn btn-info" ng-click="sec(data)">SEÇ</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var app = angular.module("myApp", []);
+
+        app.controller("ProductListController", function ($scope, $http) {
+            $scope.productList = function () {
+                $http.get("/Default/GetAllProducts").then(function (response) {
+                    $scope.jsonData = response.data;
+                });
+            };
+
+            $scope.productList();
+
+            $scope.temizle = function () {
+                $scope.productName = "";
+                $scope.discontinued = false;
+            };
+
+            $scope.sil = function (productId) {
+                $http({
+                    method: "post",
+                    url: "/Default/DeleteProduct",
+                    params: {
+                        id: JSON.stringify(productId)
+                    }
+                }).then(function () {
+                    $scope.productList();
+                    alert('silindi...');
+                });
+            };
+
+            $scope.ekle = function () {
+                var product = {
+                    ProductName: $scope.productName,
+                    Discontinued: $scope.discontinued
+                };
+
+                $http({
+                    method: "post",
+                    url: "/Default/AddProduct",
+                    data: JSON.stringify(product),
+                    dataType: "json"
+                }).then(function () {
+                    $scope.productList();
+                    $scope.temizle();
+                    alert('eklendi...');
+                });
+            };
+
+            $scope.sec = function (data) {
+                $scope.productID = data.ProductID;
+                $scope.productName = data.ProductName;
+                $scope.discontinued = data.Discontinued;
+            };
+
+            $scope.guncelle = function () {
+                var product = {
+                    ProductID: $scope.productID,
+                    ProductName: $scope.productName,
+                    Discontinued: $scope.discontinued
+                };
+
+                $http({
+                    method: "post",
+                    url: "/Default/UpdateProduct",
+                    data: JSON.stringify(product),
+                    dataType: "json"
+                }).then(function () {
+                    $scope.productList();
+                    $scope.temizle();
+                    alert('güncellendi...');
+                })
+            };
+        });
+    </script>    
+}

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<div class="container" ng-app="angularJSFilters" ng-controller="UrunlerController">
+    <div class="row" style="margin-top:50px;">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-8 col-md-offset-2">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Ürün ID</th>
+                                <th>Ürün Adı</th>
+                                <th>Ürün Fiyatı</th>
+                                <th>
+                                    <input type="text" ng-model="arama"/>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in Urunler | filter:arama | orderBy:'ProductName':true">
+                                <!--orderBy'a true değeri verirsek desc, hiç true yazmazsak asc sıralama yapar...-->
+                                <td>{{x.ProductID}}</td>
+                                <td>{{x.ProductName | lowercase}}</td>
+                                @*<td>{{x.ProductName | uppercase}}</td>*@
+                                @*<td>{{x.Price | number}}</td>*@
+                                <td>{{x.Price | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        var app = angular.module("angularJSFilters", []);
+        app.controller("UrunlerController", ["$scope", function ($scope) {
+            $scope.Urunler = jsonUrunler;
+        }]);
+
+        var jsonUrunler = [
+            { ProductID:1, ProductName: 'Coca Cola', Price:3.5},
+            { ProductID:2, ProductName: 'Samsung S7', Price:3300},
+            { ProductID:3, ProductName: 'iPhone 7', Price:3500},
+            { ProductID:4, ProductName: 'iPad', Price:4250},
+            { ProductID:5, ProductName: 'Casper Nirvana', Price:1000}
+        ];
+    </script>    
+}

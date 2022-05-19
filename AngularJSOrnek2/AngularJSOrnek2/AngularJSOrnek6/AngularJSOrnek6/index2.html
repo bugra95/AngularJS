@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div class="container" ng-controller="EgitmenlerListesi">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>AD</th>
+                        <th>SOYAD</th>
+                        <th>BÖLÜM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="egitmen in egitmenler">
+                        <td>{{ egitmen.ad }}</td>
+                        <td>{{ egitmen.soyad }}</td>
+                        <td>{{ egitmen.bolum }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

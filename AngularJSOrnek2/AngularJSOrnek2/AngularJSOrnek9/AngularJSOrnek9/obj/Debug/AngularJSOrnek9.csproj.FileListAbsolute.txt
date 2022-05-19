@@ -1,0 +1,8 @@
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\bin\AngularJSOrnek9.dll.config
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\bin\AngularJSOrnek9.dll
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\bin\AngularJSOrnek9.pdb
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\obj\Debug\AngularJSOrnek9.csprojResolveAssemblyReference.cache
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\obj\Debug\AngularJSOrnek9.dll
+c:\users\duygu.yenilmez\documents\visual studio 2017\Projects\AngularJSOrnek9\AngularJSOrnek9\obj\Debug\AngularJSOrnek9.pdb

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body>
+    <div class="container" ng-app="">
+        <div class="row">
+            <div class="col-md-8">
+                TextBox'ı Aç: 
+                <input type="checkbox" ng-model="durum" />
+                <div>
+                    <p>
+                        <input type="text" ng-show="durum" ng-model="tableBasligi"/>
+                    </p>
+                </div>
+
+                <table class="table table-bordered">
+                    <caption ng-bind="tableBasligi"></caption>
+                    <thead>
+                        <tr>
+                            <th>Öğrenci Adı</th>
+                            <th>Öğrenci Soyadı</th>
+                            <th>Öğrenci Notu</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-init="Liste=[{ad:'Fatih',soyad:'Yalçın',not:10},{ad:'Gamze',soyad:'Mercan',not:25},{ad:'Huriye',soyad:'Günenç',not:50},{ad:'Nihal',soyad:'Özdemir',not:40},{ad:'Uğur',soyad:'Akyol',not:35}]">
+                        <tr ng-repeat="ogrenci in Liste">
+                            <td>{{ogrenci.ad}}</td>
+                            <td>{{ogrenci.soyad}}</td>
+                            <td>{{ogrenci.not}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

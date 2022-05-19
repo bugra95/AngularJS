@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div ng-app="myApp" class="row" style="margin-top:30px;">
+    <div class="col-md-3">
+        <bilgeadamelement></bilgeadamelement>
+    </div>
+    <div class="col-md-3" bilgeadamattribute></div>
+    <div class="col-md-3 bilgeadamclass"></div>
+    <div class="col-md-3" bilgeadamurltemplate></div>
+</div>
+
+@section scripts{
+    <script>
+        var app = angular.module("myApp", []);
+
+        app.directive("bilgeadamelement", function () {
+            return {
+                restrict: 'E',
+                template: '<h4>AngularJS Element</h4>'
+            }
+        });
+
+        app.directive("bilgeadamattribute", function () {
+            return {
+                restrict: 'A',
+                template: '<h4>AngularJS Attribute</h4>'
+            }
+        });
+
+        app.directive("bilgeadamclass", function () {
+            return {
+                restrict: 'C',
+                template: '<h4>AngularJS Class</h4>'
+            }
+        });
+
+        app.directive("bilgeadamurltemplate", function () {
+            return {
+                templateUrl: 'MyDirective'
+            }
+        });
+    </script>    
+}

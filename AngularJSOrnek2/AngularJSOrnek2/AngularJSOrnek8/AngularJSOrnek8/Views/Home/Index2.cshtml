@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+@section scripts{
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("FilterController", function ($scope, $http) {
+            $http.get("https://jsonplaceholder.typicode.com/posts").then(function (responce) {
+                $scope.jsonData = responce.data;
+            })
+        });
+    </script>    
+}
+
+<div class="container" ng-app="myApp">
+    <div class="row" style="margin-top:10px;">
+        <input type="text" ng-model="ara" placeholder="Arama yapınız..." />
+
+        <input type="text" ng-model="sayi" placeholder="Kaç tane veri gösterilsin?" />
+    </div>
+    <div class="row" ng-controller="FilterController">
+        <ul>
+            <li ng-repeat="data in jsonData | filter:ara | orderBy:'title' | limitTo:sayi">
+                Başlık: {{data.title | lowercase}} <br />
+                İçerik: {{data.body | uppercase}} <br />
+                JSON: {{data.body | json}} <br />
+                Number: {{100000 | number}}  <br />
+                Currency: {{70000 | currency}} <br />
+            </li>
+        </ul>
+    </div>
+</div>

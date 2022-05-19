@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container" style="margin-top:20px;">
+    <div ng-app="uygulama" ng-controller="NesneKullanimi">
+        <p>
+            <label>Ad: </label>
+            <input type="text" value="{{Kisi.ad}}" />
+        </p>
+
+        <p>
+            <label>Soyad: </label>
+            <input type="text" value="{{Kisi.soyad}}" />
+        </p>
+
+        <p>
+            <label>Telefon: </label>
+            <input type="text" value="{{Kisi.telefon}}" />
+        </p>
+
+        <p>
+            <label>Adres: </label>
+            <input type="text" value="{{Kisi.adres}}" />
+        </p>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var nesne = { ad: 'Bilge', soyad: 'Adam', telefon: '1234567', adres: 'Kızılay / Ankara' };
+        var app = angular.module('uygulama', []);
+        app.controller('NesneKullanimi', ["$scope", function ($scope) {
+            $scope.Kisi = nesne;
+        }]);
+    </script>
+}

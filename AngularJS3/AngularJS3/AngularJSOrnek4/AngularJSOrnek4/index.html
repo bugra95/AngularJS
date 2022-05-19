@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.2.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-controller="OgrenciController">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Öğrenci Adı</th>
+                <th>Öğrenci Soyadı</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="ogrenci in ogrenciListesi">
+                <td>{{ogrenci.ad}}</td>
+                <td>{{ogrenci.soyad}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+<!--
+    AngularJS Module, bir uygulama çalışırken uygulamaya uygulanan yapılandırma kümesi ya da çalışma bloklarının tümüdür. Module yapısı ikiye ayrılır; config bloğu: yapılandırma işlemlerinin yapıldığı alandır, run bloğu: çalıştırma bloğudur. script tag'leriyle oluşturulur ve name verilmesi zorunludur. İsimlendirirken mutlaka camelCasing kullanılmalıdır! İsimden sonra gelen array kısmı dependency kısmıdır. Burası boş da bırakılabilir, birden fazla kütüphane ismi de girilebilir. (Dependency injection: Bağımlılıkarın dışarıdan sağlanması.) Ulaşılmak istenilen kodların kütüphaneleri bu array içine yazılabilir.Module içine yazılan kodlar o kütüphaneler içinde çalışabilecektir. Sadece başka kütüphaneleri değil, başka module'leri de buradan bağlayabiliriz...
+-->
+<script>
+    var app = angular.module("myApp", []);
+    //app.config(Yapilandirma);
+    //app.run(Calistirma);
+
+    //function Yapilandirma() {
+    //    console.log("Yapılandırıldı...");
+    //}
+
+    //function Calistirma() {
+    //    alert("Merhaba!");
+    //}
+
+    /*
+        Controller'lar $scope nesnesine ev sahipliği yapar. Controller ile uygulamanın ilk durumunu set etmeyi ve $scope nesnesini yönetmeyi sağlıyoruz. Controller isimlendirmeleri mutlaka PascalCasing olmalıdır! MVC'de controller projenin nasıl çatısıysa, AngularJS'de de module projenin çatısıdır. Her işlem module içinde gerçekleşir. Bir view içinde bir module oluşturmak demek, sadece orada kullanılabilir demek değildir!..
+        Controller oluşturmanın 3 yolu vardır:
+    */
+
+    // I.YOL: Bu yöntem geliştiriciler tarafından pek önerilmeyen bir yöntemdir...
+    //app.controller("OgrenciController", function ($scope) {
+
+    //});
+
+    // II.YOL: AngularJS tarafından önerilen bir yöntemdir. Bu yöntemde bağımlılıklarımızı [] içinde function ile birlikte belirtiriz...
+    //app.controller("OgrenciController", ["$scope", function ($scope) {
+
+    //}]);
+
+    // III.YOL: En çok önerilen yöntemdir...
+    app.controller("OgrenciController", OgrencileriGetir);
+
+    OgrencileriGetir.$inject = ["$scope"];
+
+    function OgrencileriGetir($scope) {
+        $scope.ogrenciListesi = [
+            { ad: 'Cem', soyad: 'Meşe' },
+            { ad: 'Kartal', soyad: 'Kara' },
+            { ad: 'Ali', soyad: 'Eryılmaz' },
+            { ad: 'Buğra', soyad: 'Aydın' }
+        ];
+    };
+</script>
